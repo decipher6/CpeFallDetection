@@ -10,6 +10,10 @@
 #define vibrate_threshold 2
 #define email_threshold 5
 
+//symbolic constants for fall detection thresholds
+#define lower_fall 0
+#define upper_fall 0.2
+
 // setting up credentials for wifi
 const char* ssid = "NETGEAR71";//SSID for wifi connection
 const char* password = "classyearth413";//password for wifi connection
@@ -66,10 +70,11 @@ void loop() {
   //initialize the counter to 0 and button status to false
   int counter = 0;
   bool bttn_pressed = false;
-  M5.IMU.getAccelData(&accln_x, &accln_y, &accln_z); // Obtain accelerometer data
- 
+  // Obtain accelerometer data
+  M5.IMU.getAccelData(&accln_x, &accln_y, &accln_z); 
   
-  if (accln_z > 0 && accln_z < 0.2){//condition for fall detection
+  //condition for fall detection
+  if (accln_z > lower_fall && accln_z < upper fall){
  
     while(bttn_pressed == false){//loops while button is not pressed
 
@@ -182,20 +187,21 @@ bool is_pressed(){
     return true;
   }
   return false;
- 
- 
 }
  
 //this function gets and  prints the local time
 void printLocalTime(){
   struct tm timeinfo;
-  while (!getLocalTime(&timeinfo)) {  //Return 1 when the time is successfully obtained.
+  //getLocalTime(&timeinfo)returns 1 when the time is successfully obtained.
+  while (!getLocalTime(&timeinfo)) {  
     M5.Lcd.println("Failed to obtain time");
-    configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);  //init and get the time.
+    //init and get the time.
+    configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);  
   }
   //set cursor, size and colour for time display
   M5.lcd.setCursor(9, 90);
   M5.Lcd.setTextColor(GREEN);
   M5.lcd.setTextSize(3);
-  M5.Lcd.println(&timeinfo, "%d %B %Y \n     %A \n\n     %H:%M:%S");  //Screen prints date and time.
+  //Screen prints date and time.
+  M5.Lcd.println(&timeinfo, "%d %B %Y \n     %A \n\n     %H:%M:%S");  
 }
