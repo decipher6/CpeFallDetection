@@ -69,7 +69,7 @@ void loop() {
   M5.IMU.getAccelData(&accln_x, &accln_y, &accln_z); // Obtain accelerometer data
  
   
-  if (accln_z > 0 && accln_z < 0.35){//condition for fall detection
+  if (accln_z > 0 && accln_z < 0.2){//condition for fall detection
  
     while(bttn_pressed == false){//loops while button is not pressed
 
