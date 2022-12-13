@@ -74,7 +74,7 @@ void loop() {
   M5.IMU.getAccelData(&accln_x, &accln_y, &accln_z); 
   
   //condition for fall detection
-  if (accln_z > lower_fall && accln_z < upper fall){
+  if (accln_z > lower_fall && accln_z < upper_fall){
  
     while(bttn_pressed == false){//loops while button is not pressed
 
